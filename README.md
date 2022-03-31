@@ -12,9 +12,9 @@
 - [x] GET (/api/v1/github/login)
 - [x] GET (/api/v1/github/login/callback)
 - [x] DELETE (/api/v1/github)
-- [] GET (/api/v1/posts)
+- [x] GET (/api/v1/posts)
 - [x] POST (api/v1/posts)
 - [x] GithubUser model
-- [] Post model
-- [] Auth middleware protects /api/v1/posts
+- [x] Post model
+- [x] Auth middleware protects /api/v1/posts
 - [] Tests for all routes
