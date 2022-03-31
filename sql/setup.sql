@@ -9,8 +9,8 @@ CREATE TABLE github_users (
   avatar TEXT
 );
 
--- CREATE TABLE posts (
---   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
---   text TEXT NOT NULL,
---   username TEXT REFERENCES github_users(username)
--- )
+CREATE TABLE posts (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  text TEXT NOT NULL,
+  username TEXT REFERENCES github_users(username)
+)
