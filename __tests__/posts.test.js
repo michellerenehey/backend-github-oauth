@@ -24,7 +24,7 @@ describe('backend-gitty routes', () => {
     pool.end();
   });
 
-  it('creates a post when a user is logged in', async () => {
+  it('creates a post when a user is logged in (POST)', async () => {
     // logging in
     const agent = request.agent(app);
     await GithubUser.insert({
