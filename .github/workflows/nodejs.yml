@@ -15,6 +15,11 @@ jobs:
     - uses: actions/checkout@v2
     - run: npm ci
     - run: npm test
-      env:
-        CI: true
-        DATABASE_URL: postgres://alchemy:alchemy@postgres:5432/alchemy
+        env:
+          CI: true
+          DATABASE_URL: postgres://alchemy:alchemy@postgres:5432/alchemy
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
+          COOKIE_NAME: ${{ secrets.REDIRECT_URI }}
