@@ -15,3 +15,10 @@ CREATE TABLE posts (
   text VARCHAR (255) NOT NULL,
   username TEXT REFERENCES github_users(username)
 );
+
+INSERT INTO
+  posts (text)
+VALUES
+  ('Post 1!'), 
+  ('Post 2!'), 
+  ('Post 3!');
