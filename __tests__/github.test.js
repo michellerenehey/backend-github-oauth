@@ -22,9 +22,9 @@ describe('gitty routes', () => {
     );
   });
 
-  it('logging in should redirect users to TBD', async () => {
-    const req = await request
-      .agent(app)
+  it('logging in should redirect users to /api/v1/posts', async () => {
+    const agent = request.agent(app);
+    const req = await agent
       .get('/api/v1/github/login/callback?code=42')
       .redirects(1);
 

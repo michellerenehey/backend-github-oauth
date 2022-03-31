@@ -1,4 +1,4 @@
-fetch('/api/v1/auth/verify')
+fetch('/api/v1/github/login')
   .then((res) => {
     if (res.ok) return res.json();
     else throw new Error('Not logged in');
@@ -37,7 +37,7 @@ function renderIsLoggedIn(user) {
     const fd = new FormData(event.target);
     const text = fd.get('text');
 
-    fetch('/api/v1/tweets', {
+    fetch('/api/v1/posts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
