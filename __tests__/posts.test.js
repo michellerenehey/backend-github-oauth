@@ -25,27 +25,23 @@ describe('backend-gitty routes', () => {
   });
 
   it('creates a post when a user is logged in', async () => {
+    // logging in
     const agent = request.agent(app);
     await GithubUser.insert({
       username: 'test_user',
       photoUrl: 'http://image.com/image.png',
     });
-
-    return agent
-      .post('/api/v1/posts')
-      .send({
-        text: 'New post, testing it out!',
-      })
-      .then((res) => {
-        expect(res.body).toEqual({
-          id: expect.any(String),
-          text: 'New post, testing it out!',
-          username: 'test_user',
-        });
-      });
+    // creating a post
+    const expected = { text: 'New post, testing it out!' };
+    const res = await agent.post('/api/v1/posts').send(expected);
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      ...expected,
+      username: 'test_user',
+    });
   });
 
-  it('gets all posts if user is signed in', async () => {
+  it('gets all posts if user is signed in (GET)', async () => {
     const agent = request.agent(app);
     await GithubUser.insert({
       username: 'test_user',

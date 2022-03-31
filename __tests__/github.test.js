@@ -23,7 +23,7 @@ describe('gitty routes', () => {
     );
   });
 
-  it('logging in should redirect users to /api/v1/posts', async () => {
+  it('logging in should redirect users to /api/v1/posts (GET)', async () => {
     const agent = request.agent(app);
     const req = await agent
       .get('/api/v1/github/login/callback?code=42')
@@ -38,7 +38,7 @@ describe('gitty routes', () => {
     });
   });
 
-  it('signing out should show success message', async () => {
+  it('signing out should show success message (DELETE)', async () => {
     const agent = request.agent(app);
     await GithubUser.insert({
       username: 'test_user',
