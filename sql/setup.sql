@@ -4,14 +4,13 @@ DROP TABLE IF EXISTS github_users CASCADE;
 DROP TABLE IF EXISTS posts CASCADE;
 
 CREATE TABLE github_users (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  username TEXT NOT NULL,
+  username TEXT NOT NULL PRIMARY KEY,
   email TEXT,
   avatar TEXT
 );
 
-CREATE TABLE posts (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  text TEXT NOT NULL,
-  username TEXT REFERENCES github_users(username)
-)
+-- CREATE TABLE posts (
+--   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+--   text TEXT NOT NULL,
+--   username TEXT REFERENCES github_users(username)
+-- )
