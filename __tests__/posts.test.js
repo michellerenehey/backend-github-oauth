@@ -33,6 +33,7 @@ describe('backend-gitty routes', () => {
     });
     // creating a post
     const expected = { text: 'New post, testing it out!' };
+    // testing expected
     const res = await agent.post('/api/v1/posts').send(expected);
     expect(res.body).toEqual({
       id: expect.any(String),
@@ -42,16 +43,19 @@ describe('backend-gitty routes', () => {
   });
 
   it('gets all posts if user is signed in (GET)', async () => {
+    //logging in
     const agent = request.agent(app);
     await GithubUser.insert({
       username: 'test_user',
       photoUrl: 'http://image.com/image.png',
     });
+    // expecting value
     const expected = [
       { text: 'Post 1!' },
       { text: 'Post 2!' },
       { text: 'Post 3!' },
     ];
+    // testing expected
     const res = await agent.get('/api/v1/posts');
     expect(res.body).toEqual(expected);
   });
