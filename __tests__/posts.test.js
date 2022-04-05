@@ -4,16 +4,7 @@ const request = require('supertest');
 const app = require('../lib/app');
 const GithubUser = require('../lib/models/GithubUser');
 
-jest.mock('../lib/middleware/authenticate.js', () => {
-  return (req, res, next) => {
-    req.user = {
-      username: 'test_user',
-      photoUrl: 'http://image.com/image.png',
-    };
-
-    next();
-  };
-});
+jest.mock('../lib/utils/github');
 
 describe('backend-gitty routes', () => {
   beforeEach(() => {
@@ -25,30 +16,26 @@ describe('backend-gitty routes', () => {
   });
 
   it('creates a post when a user is logged in (POST)', async () => {
-    // logging in
     const agent = request.agent(app);
-    await GithubUser.insert({
-      username: 'test_user',
-      photoUrl: 'http://image.com/image.png',
-    });
-    // creating a post
-    const expected = { text: 'New post, testing it out!' };
-    // testing expected
-    const res = await agent.post('/api/v1/posts').send(expected);
-    expect(res.body).toEqual({
+    const expected = {
       id: expect.any(String),
-      ...expected,
-      username: 'test_user',
-    });
+      text: 'example',
+      username: 'fake_github_user',
+    };
+    let res = await agent.post('/api/v1/posts').send(expected);
+    expect(res.status).toEqual(401);
+
+    await agent.get('/api/v1/github/login/callback?code=42').redirects(1);
+
+    res = await agent.post('/api/v1/posts').send(expected);
+    expect(res.body).toEqual(expected);
   });
 
   it('gets all posts if user is signed in (GET)', async () => {
     //logging in
     const agent = request.agent(app);
-    await GithubUser.insert({
-      username: 'test_user',
-      photoUrl: 'http://image.com/image.png',
-    });
+    await agent.get('/api/v1/github/login/callback?code=42').redirects(1);
+
     // expecting value
     const expected = [
       { text: 'Post 1!' },

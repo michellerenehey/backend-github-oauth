@@ -29,21 +29,11 @@ describe('gitty routes', () => {
       .get('/api/v1/github/login/callback?code=42')
       .redirects(1);
 
-    expect(req.body).toEqual({
-      username: 'fake_github_user',
-      email: 'not-real@example.com',
-      avatar: expect.any(String),
-      iat: expect.any(Number),
-      exp: expect.any(Number),
-    });
+    expect(req.req.path).toEqual('/api/v1/posts');
   });
 
   it('signing out should show success message (DELETE)', async () => {
     const agent = request.agent(app);
-    await GithubUser.insert({
-      username: 'test_user',
-      photoUrl: 'http://image.com/image.png',
-    });
     const res = await agent.delete('/api/v1/github/sessions');
 
     expect(res.body).toEqual({
