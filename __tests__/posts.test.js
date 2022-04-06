@@ -4,7 +4,7 @@ const request = require('supertest');
 const app = require('../lib/app');
 const GithubUser = require('../lib/models/GithubUser');
 
-jest.mock('../lib/utils/github');
+jest.mock('../lib/utils/github'); // '../lib/utils/__mocks__/github'
 
 describe('backend-gitty routes', () => {
   beforeEach(() => {
