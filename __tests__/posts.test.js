@@ -26,7 +26,6 @@ describe('backend-gitty routes', () => {
     expect(res.status).toEqual(401);
 
     await agent.get('/api/v1/github/login/callback?code=42').redirects(1);
-
     res = await agent.post('/api/v1/posts').send(expected);
     expect(res.body).toEqual(expected);
   });
