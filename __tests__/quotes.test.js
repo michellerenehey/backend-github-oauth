@@ -14,9 +14,18 @@ describe('backend-gitty routes', () => {
 
   it('gets array of quote objects from the three different API', async () => {
     const expected = [
-      { author: expect.any(String), content: expect.any(String) },
-      { author: expect.any(String), content: expect.any(String) },
-      { author: expect.any(String), content: expect.any(String) },
+      {
+        author: expect.any(String),
+        content: expect.any(String),
+      },
+      {
+        author: expect.any(String),
+        content: expect.any(String),
+      },
+      {
+        author: expect.any(String),
+        content: expect.any(String),
+      },
     ];
     const res = await request(app).get('/api/v1/quotes');
     expect(res.body).toEqual(expected);
