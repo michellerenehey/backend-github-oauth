@@ -2,7 +2,6 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
-const GithubUser = require('../lib/models/GithubUser');
 
 jest.mock('../lib/utils/github');
 
@@ -25,11 +24,11 @@ describe('gitty routes', () => {
 
   it('logging in should redirect users to /api/v1/posts (GET)', async () => {
     const agent = request.agent(app);
-    const req = await agent
+    const res = await agent
       .get('/api/v1/github/login/callback?code=42')
       .redirects(1);
 
-    expect(req.req.path).toEqual('/api/v1/posts');
+    expect(res.req.path).toEqual('/api/v1/posts');
   });
 
   it('signing out should show success message (DELETE)', async () => {
